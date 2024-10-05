@@ -1,316 +1,165 @@
 # LangCheck: Smart Contract Language Audit Checklist
 
-An organized and comprehensive checklist to assist auditors in evaluating the security, reliability, and quality of smart contract languages.
-
 ## How to Use This Checklist
 
-1. **Familiarize Yourself with the Language**: Begin by understanding the fundamental concepts, syntax, and semantics of the smart contract language under review.
+LangCheck is a comprehensive checklist designed for auditors evaluating the security, reliability, and maintainability of smart contract languages. It helps auditors systematically review aspects of a language that can impact the quality and security of the smart contracts developed with it.
 
-2. **Review Categories Systematically**: Go through each category in the checklist, examining the language features and tooling against each item.
+This checklist is organized into distinct categories, each addressing a particular aspect of smart contract development. Each item includes an explanation, hidden behind a toggle for ease of reading, explaining why the check is important and the risks or security concerns it addresses. By following the checklist, auditors can ensure that they don't overlook any critical areas and can gain a thorough understanding of the strengths and weaknesses of the language under review.
 
-3. **Document Findings**: For each item, note whether the language meets the criteria, partially meets it, or fails to meet it. Provide detailed explanations for any issues found.
+To use the checklist effectively:
+1. Review the categories and choose those relevant to your audit focus. Multiple aspects may need to be considered simultaneously, as some language features can impact different areas of security, performance, and reliability.
+2. Check each item to understand the rationale and context. The explanations provide deeper insights into why a particular aspect is important, helping assess the risks associated with the language.
+3. Proceed through each item systematically to ensure a comprehensive review. A systematic approach helps ensure that no critical aspects are missed and that all potential vulnerabilities are identified.
 
-4. **Prioritize Issues**: Identify critical vulnerabilities or shortcomings that could significantly impact security or functionality, and prioritize them for remediation.
+Auditors are encouraged to take notes while progressing through the checklist, as these notes can be valuable for communicating findings to stakeholders and for creating detailed audit reports. LangCheck can also be used iteratively—returning to the checklist during different stages of the audit can help confirm that all issues are addressed.
 
-5. **Provide Recommendations**: Suggest improvements or best practices to address any identified issues.
-
----
+>[!NOTE] 
+> Click the toggle of each item to see the explanation behind.
 
 ## Table of Contents
-
-- [1. Language Syntax and Semantics](#1-language-syntax-and-semantics)
-- [2. Compiler and Tooling](#2-compiler-and-tooling)
-- [3. Security Features and Vulnerabilities](#3-security-features-and-vulnerabilities)
-- [4. Concurrency and Parallelism](#4-concurrency-and-parallelism)
-- [5. Storage and State Management](#5-storage-and-state-management)
-- [6. Performance and Gas Efficiency](#6-performance-and-gas-efficiency)
-- [7. Error Handling and Exception Safety](#7-error-handling-and-exception-safety)
-- [8. Documentation and Community Support](#8-documentation-and-community-support)
-- [9. Code Readability and Maintainability](#9-code-readability-and-maintainability)
-- [10. Dependency Management](#10-dependency-management)
-
----
+1. [Language Syntax and Semantics](#1-language-syntax-and-semantics)
+2. [Compiler and Tooling](#2-compiler-and-tooling)
+3. [Security Features and Vulnerabilities](#3-security-features-and-vulnerabilities)
+4. [Concurrency and Parallelism](#4-concurrency-and-parallelism)
+5. [Storage and State Management](#5-storage-and-state-management)
+6. [Performance and Gas Efficiency](#6-performance-and-gas-efficiency)
+7. [Error Handling and Exception Safety](#7-error-handling-and-exception-safety)
+8. [Documentation and Community Support](#8-documentation-and-community-support)
+9. [Code Readability and Maintainability](#9-code-readability-and-maintainability)
+10. [Dependency Management](#10-dependency-management)
 
 ## 1. Language Syntax and Semantics
 
-### 1.1 Misleading Notation and Syntax Ambiguities
+<details>
+<summary><strong>Does the language allow developers to define arbitrary custom selectors for functions?</strong></summary>
+<i>Custom selectors can lead to collisions, especially in proxy patterns. Ensuring proper checks helps avoid introducing backdoors or making malicious code harder to detect. This is especially important in the context of contract upgrades and dispatchers that rely on unique selectors to route function calls correctly.</i>
+</details>
 
-- **L1**: Does the language allow the use of non-existent keywords or attributes without triggering an error?  
-  *This can mislead developers and readers, potentially hiding malicious code.*
+<details>
+<summary><strong>Does the language allow misleading or undefined keywords?</strong></summary>
+<i>Allowing undefined keywords or misleading notation can be exploited to deceive reviewers and introduce vulnerabilities that are difficult to detect. Such features can lead to misunderstandings of the code's intent and make it harder to spot potential vulnerabilities during code review.</i>
+</details>
 
-- **L2**: Are there any syntactic elements that could be confusing or easily misinterpreted?  
-  *Ambiguities in syntax can lead to unintended code behavior.*
-
-### 1.2 Arbitrary Custom Selectors
-
-- **L3**: Does the language allow developers to define custom selectors for functions?  
-  *Custom selectors can lead to selector collisions and security vulnerabilities.*
-
-- **L4**: Are there mechanisms to prevent selector collisions, especially in proxy patterns and upgrades?
-
-- **L5**: Can arbitrary custom selectors be exploited to introduce backdoors or obfuscate malicious code?
-
-### 1.3 Implicit State Mutability
-
-- **L6**: Does the language make state mutability explicit in functions and methods?  
-  *Implicit mutability can lead to unintended state changes and side effects.*
-
-- **L7**: Are there clear distinctions between pure, view, and mutating functions?
-
-### 1.4 Inconsistent Type Inference
-
-- **L8**: Is type inference consistent and predictable throughout the language?
-
-- **L9**: Are there scenarios where type inference could lead to unexpected behavior or vulnerabilities?
-
----
+<details>
+<summary><strong>Does the language default to state mutability when not explicitly declared?</strong></summary>
+<i>Implicit state mutability can lead to unexpected behaviors and potential vulnerabilities, especially in environments where state consistency is crucial. Explicitly declaring state mutability makes it clear when state changes are occurring, which is essential for maintaining contract integrity and preventing unauthorized modifications.</i>
+</details>
 
 ## 2. Compiler and Tooling
 
-### 2.1 Error Reporting and Debugging
+<details>
+<summary><strong>Is the compilation process clear, and do errors provide sufficient information?</strong></summary>
+<i>Clear compiler errors are crucial for identifying issues quickly. Cryptic error messages can delay development and increase the risk of undetected vulnerabilities. A good compiler should provide meaningful feedback that helps developers understand what went wrong and how to fix it.</i>
+</details>
 
-- **C1**: Does the compiler provide clear and actionable error messages when code fails to compile?  
-  *Opaque or unhelpful errors hinder development and debugging.*
-
-- **C2**: Is there a robust debugger available for the language?  
-  *A lack of debugging tools can make it difficult to trace and fix issues.*
-
-### 2.2 Build Output
-
-- **C3**: Is the compilation output excessively large?  
-  *Large binaries can lead to increased deployment costs and may indicate inefficiencies.*
-
-- **C4**: Is the build output deterministic?  
-  *Deterministic builds are essential for verifying code and ensuring consistency across deployments.*
-
-### 2.3 Toolchain Support
-
-- **C5**: Are there reliable tools for testing, linting, and static analysis available?
-
-- **C6**: Does the language integrate smoothly with existing development environments and CI/CD pipelines?
-
----
+<details>
+<summary><strong>Is the build output deterministic and verifiable?</strong></summary>
+<i>Deterministic builds ensure that the same code produces the same bytecode every time, which is critical for verifying contract deployments and preventing supply chain attacks. Non-deterministic builds can lead to discrepancies between the audited code and the deployed contract, undermining trust in the contract's security.</i>
+</details>
 
 ## 3. Security Features and Vulnerabilities
 
-### 3.1 Reentrancy Protection
+<details>
+<summary><strong>Does the language provide built-in reentrancy protection?</strong></summary>
+<i>Reentrancy attacks can drain contracts of funds. Built-in reentrancy protection helps prevent these attacks, reducing reliance on developer awareness alone. Languages that provide primitives for managing reentrancy can help developers avoid common pitfalls and write more secure code by default.</i>
+</details>
 
-- **S1**: Is reentrancy enabled by default in the language?  
-  *Reentrancy can lead to critical vulnerabilities if not properly managed.*
-
-- **S2**: Does the language provide built-in primitives or abstractions to prevent reentrancy attacks?
-
-- **S3**: Are there default protections or patterns recommended to developers to mitigate reentrancy?
-
-### 3.2 Overflow and Underflow Protection
-
-- **S4**: Does the language have built-in mechanisms to prevent integer overflow and underflow vulnerabilities?  
-  *Arithmetic errors can lead to significant security issues.*
-
-- **S5**: Are these checks enforced at compile-time or runtime?
-
-### 3.3 Input Validation and Sanity Checks
-
-- **S6**: Does the language encourage or enforce robust input validation mechanisms?  
-  *Validating external data is critical for security.*
-
-- **S7**: Are there standard libraries or functions to assist with input sanitization?
-
-### 3.4 Error Propagation and Handling
-
-- **S8**: How does the language handle errors and exceptions within contracts and across external calls?  
-  *Proper error handling is essential for predictable and secure code execution.*
-
-- **S9**: Are errors propagated correctly, and can they be handled gracefully by developers?
-
-### 3.5 Native Asset Handling
-
-- **S10**: Can contracts created with the language receive the native asset (e.g., Ether) without explicit indication?  
-  *Implicit receipt of assets can lead to unintended vulnerabilities.*
-
-- **S11**: Are there safeguards to prevent contracts from unintentionally accepting native assets?
-
-### 3.6 Gas Management
-
-- **S12**: Are there scenarios where gas is incorrectly charged, either overpriced or free?  
-  *Improper gas charging can halt nodes or lead to denial-of-service attacks.*
-
-- **S13**: Does the language provide accurate gas estimation and management tools?
-
-### 3.7 Dependency Security
-
-- **S14**: How does the language manage external dependencies and libraries?  
-  *Dependency hijacking can introduce vulnerabilities.*
-
-- **S15**: Are there mechanisms to verify the integrity and security of dependencies?
-
-- **S16**: Are security audits required or facilitated for external dependencies?
-
----
+<details>
+<summary><strong>Are there built-in mechanisms to prevent overflow and underflow vulnerabilities?</strong></summary>
+<i>Ensuring integer safety at runtime or compile-time is critical to prevent financial exploits and maintain contract integrity. Overflow and underflow vulnerabilities have led to major exploits in the past, and having built-in safeguards is essential for protecting smart contract funds.</i>
+</details>
 
 ## 4. Concurrency and Parallelism
 
-### 4.1 Race Conditions and State Synchronization
+<details>
+<summary><strong>Does the language provide primitives for managing concurrent state updates?</strong></summary>
+<i>In parallel execution environments, race conditions can lead to inconsistent state. Proper synchronization primitives are necessary to maintain consistency. Race conditions can lead to unexpected behaviors, allowing attackers to manipulate the contract state to their advantage.</i>
+</details>
 
-- **P1**: Does the language support multi-threading or parallel execution?  
-  *Concurrency introduces complexity in state management.*
-
-- **P2**: Are there robust synchronization primitives (e.g., mutexes, semaphores) to ensure safe concurrent access to shared data?
-
-- **P3**: Can race conditions emerge due to improper synchronization of state updates?
-
-### 4.2 Reentrancy Concerns
-
-- **P4**: How does the language handle reentrancy in concurrent contexts?
-
-- **P5**: Are there built-in protections or best practices to prevent concurrent execution vulnerabilities?
-
----
+<details>
+<summary><strong>Can contracts receive native assets without explicit handling?</strong></summary>
+<i>Implicitly accepting native assets can lead to unintended behavior or vulnerabilities, especially if the developer does not anticipate such transfers. Explicit handling of native assets ensures that the contract behaves predictably when receiving funds and that appropriate security checks are in place.</i>
+</details>
 
 ## 5. Storage and State Management
 
-### 5.1 Storage Layout and Upgradability
+<details>
+<summary><strong>How does the language manage storage layout, particularly for upgradable contracts?</strong></summary>
+<i>Consistent and predictable storage layouts help prevent collisions and ensure state integrity, especially for contracts that are upgraded over time. Storage collisions can corrupt the contract state, leading to vulnerabilities that are difficult to detect and exploit.</i>
+</details>
 
-- **ST1**: How does the language manage the storage layout, particularly for complex data structures and upgradable contracts?  
-  *Poor storage management can lead to storage collisions and data corruption.*
-
-- **ST2**: Does it follow a consistent and predictable pattern for storage allocation?
-
-- **ST3**: Are there tools or features to assist with safe contract upgrades without risking storage collisions?
-
-### 5.2 Implicit State Changes
-
-- **ST4**: Does the language have implicit state changes that are not obvious from the code?  
-  *Hidden state changes can introduce bugs and vulnerabilities.*
-
-- **ST5**: Are developers required to explicitly declare state modifications?
-
-### 5.3 Native Asset Receipt
-
-- **ST6**: Are there scenarios where contracts might implicitly receive the native asset without the developer's intention?  
-  *This can lead to unintended asset holding and potential security issues.*
-
-- **ST7**: Does the language provide mechanisms to prevent or alert developers about such scenarios?
-
----
+<details>
+<summary><strong>Are state variables explicitly marked as mutable or immutable?</strong></summary>
+<i>Explicitly marking state variables improves code readability and reduces the likelihood of accidental state changes. Immutable state variables help prevent unintended modifications, which can lead to vulnerabilities or inconsistent contract behavior.</i>
+</details>
 
 ## 6. Performance and Gas Efficiency
 
-### 6.1 Gas Cost Accuracy
+<details>
+<summary><strong>Are there scenarios where gas is charged incorrectly (overpriced or underpriced)?</strong></summary>
+<i>Inefficient gas handling can lead to denial-of-service scenarios or unnecessary costs for users. Auditing gas efficiency is critical for contract reliability. Ensuring gas is charged correctly helps maintain network stability and prevents abusive behaviors that could exploit inefficient gas accounting.</i>
+</details>
 
-- **G1**: Does the language provide accurate gas cost estimations for operations?  
-  *Incorrect gas costs can lead to failed transactions and inefficiencies.*
-
-- **G2**: Are there tools to help optimize code for gas efficiency?
-
-### 6.2 Performance Issues
-
-- **G3**: Are there known performance bottlenecks within the language's execution model?
-
-- **G4**: Does the language produce optimized bytecode or machine code?
-
-### 6.3 Build Output Size
-
-- **G5**: Is the compiled contract size excessively large?  
-  *Large contract sizes can exceed platform limits and increase costs.*
-
-- **G6**: Are there optimization techniques to reduce the build output size?
-
----
+<details>
+<summary><strong>Does the build output result in a large contract size?</strong></summary>
+<i>Large contract sizes may lead to higher deployment costs and exceed size limits imposed by blockchain platforms, necessitating optimizations. Optimizing contract size is crucial for reducing deployment costs and ensuring that the contract can be deployed within the constraints of the target platform.</i>
+</details>
 
 ## 7. Error Handling and Exception Safety
 
-### 7.1 Exception Management
+<details>
+<summary><strong>Are errors properly propagated and handled, both within contracts and during external calls?</strong></summary>
+<i>Proper error handling ensures that contract execution remains predictable and that unexpected conditions do not lead to vulnerabilities or locked funds. Ensuring errors are properly propagated allows developers to write contracts that handle failures gracefully, reducing the risk of funds being permanently locked due to unforeseen issues.</i>
+</details>
 
-- **E1**: How does the language handle exceptions and runtime errors?  
-  *Consistent error handling is crucial for reliable contract execution.*
-
-- **E2**: Are there constructs for try-catch mechanisms or equivalent?
-
-### 7.2 Error Propagation
-
-- **E3**: Are errors and exceptions properly propagated across contract calls?
-
-- **E4**: Can contracts catch and handle exceptions from external calls safely?
-
-### 7.3 Fail-Safe Defaults
-
-- **E5**: Does the language encourage fail-safe defaults, ensuring that contracts default to secure states in case of errors?
-
-- **E6**: Are there guidelines or patterns for implementing safe error handling?
-
----
+<details>
+<summary><strong>Does the language provide adequate debugging tools?</strong></summary>
+<i>Debugging tools are essential for identifying and fixing issues, especially during the development and auditing phases. A lack of proper debugging tools can make it difficult for developers to understand how their contracts behave, leading to missed vulnerabilities and errors.</i>
+</details>
 
 ## 8. Documentation and Community Support
 
-### 8.1 Documentation Accuracy
+<details>
+<summary><strong>Is the language documentation up to date and consistent with the current state of the language?</strong></summary>
+<i>Up-to-date documentation ensures developers and auditors have the correct information, reducing misunderstandings and mistakes. Inconsistent or outdated documentation can lead to incorrect assumptions about the language's behavior, resulting in vulnerabilities or inefficient code.</i>
+</details>
 
-- **D1**: Is there a mismatch between the language documentation and its current state?  
-  *Outdated or incorrect documentation can lead to misuse and vulnerabilities.*
-
-- **D2**: Is the documentation comprehensive, covering all language features and edge cases?
-
-### 8.2 Learning Resources
-
-- **D3**: Are there sufficient tutorials, guides, and examples to help developers learn the language effectively?
-
-- **D4**: Does the language have an active community or support channels for developers?
-
-### 8.3 Best Practices and Standards
-
-- **D5**: Are there established best practices, style guides, or standards for writing secure and efficient code in the language?
-
-- **D6**: Does the language documentation highlight common pitfalls and how to avoid them?
-
----
+<details>
+<summary><strong>Does the language have an active community and available support channels?</strong></summary>
+<i>A strong community can provide timely support, identify potential issues, and contribute to language improvements. Active community engagement helps ensure that the language evolves to address security concerns and that developers have access to the resources they need.</i>
+</details>
 
 ## 9. Code Readability and Maintainability
 
-### 9.1 Syntax Clarity
+<details>
+<summary><strong>Is the language syntax designed for readability and clarity?</strong></summary>
+<i>A language that promotes readability helps developers write secure code and reduces the likelihood of mistakes that lead to vulnerabilities. Readable syntax makes it easier for both developers and auditors to understand the code's intent, leading to fewer misunderstandings and a lower risk of errors.</i>
+</details>
 
-- **R1**: Does the language syntax promote clarity and readability?  
-  *A language that's hard to read is hard to write securely.*
-
-- **R2**: Are there constructs or features that could lead to obfuscated or confusing code?
-
-### 9.2 Consistency
-
-- **R3**: Does the language enforce or encourage consistent coding styles?
-
-- **R4**: Are there linters or formatters available to maintain code consistency?
-
-### 9.3 Commenting and Documentation
-
-- **R5**: Does the language support inline documentation or annotations?
-
-- **R6**: Are developers encouraged to document code thoroughly, explaining complex logic and decisions?
-
----
+<details>
+<summary><strong>Does the language encourage or enforce proper commenting practices?</strong></summary>
+<i>Proper comments and documentation help future maintainers understand the code, reducing the risk of introducing bugs during updates. Enforcing good commenting practices ensures that important information about the code's behavior, limitations, and intent is preserved for future developers.</i>
+</details>
 
 ## 10. Dependency Management
 
-### 10.1 Package Management
+<details>
+<summary><strong>Are there mechanisms to audit or verify dependencies?</strong></summary>
+<i>Dependencies can introduce vulnerabilities if not properly audited. Ensuring all dependencies are secure is crucial for overall contract security. Proper auditing mechanisms help identify and mitigate risks associated with third-party code, reducing the attack surface of the contract.</i>
+</details>
 
-- **DM1**: Does the language have a standard package manager for handling dependencies?  
-  *Proper dependency management is essential for security and maintainability.*
-
-- **DM2**: Are dependency versions locked to prevent unintentional upgrades?
-
-### 10.2 Dependency Verification
-
-- **DM3**: Are there tools to verify the integrity and authenticity of dependencies?  
-  *Dependency hijacking is a significant security risk.*
-
-- **DM4**: Can dependencies be audited for security vulnerabilities before inclusion?
-
-### 10.3 Supply Chain Security
-
-- **DM5**: Does the language ecosystem provide mechanisms to protect against supply chain attacks?
-
-- **DM6**: Are there guidelines for securely managing and updating dependencies?
+<details>
+<summary><strong>Does the language ecosystem provide protection against dependency hijacking?</strong></summary>
+<i>Dependency hijacking can lead to malicious code being introduced into contracts. Proper verification mechanisms help mitigate this risk. Protecting against dependency hijacking ensures that only trusted code is included in the contract, preventing potential backdoors and malicious behaviors.</i>
+</details>
 
 ---
 
-# Conclusion
+>[!tip]
+>**Pro Tip**: Bookmark this checklist and revisit it regularly to stay updated with best practices in smart contract language auditing.
 
-This checklist serves as a comprehensive guide for auditors to evaluate the robustness, security, and developer-friendliness of smart contract languages. By systematically addressing each point, auditors can identify potential vulnerabilities, inefficiencies, and areas for improvement, ultimately contributing to the development of more secure and reliable smart contract platforms.
+## 🌟 Community Contributions Welcome! 🌟
+
+We encourage the community to contribute to LangCheck by suggesting additional checklist items, best practices, or improvements. Your input can help make this checklist even more comprehensive and useful for smart contract language audits. Feel free to submit your suggestions or contribute to the ongoing discussion to help improve smart contract security for everyone.
+
+**[Contribute to LangCheck](#)**
