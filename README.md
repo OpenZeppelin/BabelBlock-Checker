@@ -1,5 +1,8 @@
 # LangCheck: Smart Contract Language Audit Checklist
 
+>[!tip]
+>**Pro Tip**: Bookmark this checklist and revisit it regularly to stay updated with best practices in smart contract language auditing.
+
 ## How to Use This Checklist
 
 LangCheck is a comprehensive checklist designed for auditors evaluating the security, reliability, and maintainability of smart contract languages. It helps auditors systematically review aspects of a language that can impact the quality and security of the smart contracts developed with it.
@@ -31,8 +34,23 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 ## 1. Language Syntax and Semantics
 
 <details>
+<summary><strong>Does the language have a strong, static type system?</strong></summary>
+<i>A strong, static type system can prevent many runtime errors and vulnerabilities by catching type-related issues at compile-time. This reduces the likelihood of unexpected behavior in deployed contracts and enhances overall security.</i>
+</details>
+
+<details>
+<summary><strong>Are there safeguards against common type-related vulnerabilities?</strong></summary>
+<i>Type confusion and unsafe type casting can lead to severe vulnerabilities. Built-in safeguards against these issues can significantly reduce the risk of exploitation and improve contract reliability.</i>
+</details>
+
+<details>
 <summary><strong>Does the language allow developers to define arbitrary custom selectors for functions?</strong></summary>
 <i>Custom selectors can lead to collisions, especially in proxy patterns. Ensuring proper checks helps avoid introducing backdoors or making malicious code harder to detect. This is especially important in the context of contract upgrades and dispatchers that rely on unique selectors to route function calls correctly.</i>
+</details>
+
+<details>
+<summary><strong>How does the language handle event emissions and logging?</strong></summary>
+<i>Efficient and standardized event logging is essential for off-chain monitoring and indexing. Proper event handling can improve transparency and facilitate better tracking of contract activities.</i>
 </details>
 
 <details>
@@ -86,6 +104,11 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 <details>
 <summary><strong>How does the language manage storage layout, particularly for upgradable contracts?</strong></summary>
 <i>Consistent and predictable storage layouts help prevent collisions and ensure state integrity, especially for contracts that are upgraded over time. Storage collisions can corrupt the contract state, leading to vulnerabilities that are difficult to detect and exploit.</i>
+</details>
+
+<details>
+<summary><strong>Does the language provide native support for upgradeable contract patterns?</strong></summary>
+<i>Native support for upgradeability can help standardize and secure the process of contract upgrades. Some languages, like ink!, offer efficient upgradeability mechanisms that move away from traditional proxy patterns. For example, ink! provides the <code>set_code_hash()</code> function for direct code replacement. This approach simplifies upgrades and preserves contract state. For details on this method and its implementation, refer to the ink! <a href="https://use.ink/basics/upgradeable-contracts#replacing-contract-code-with-set_code_hash">documentation</a>.</i>
 </details>
 
 <details>
@@ -154,9 +177,6 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 </details>
 
 ---
-
->[!tip]
->**Pro Tip**: Bookmark this checklist and revisit it regularly to stay updated with best practices in smart contract language auditing.
 
 ## 🌟 Community Contributions Welcome! 🌟
 
