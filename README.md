@@ -71,6 +71,11 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 </details>
 
 <details>
+<summary><strong>Does the compiler offer optimization options that could potentially introduce vulnerabilities?</strong></summary>
+<i>While compiler optimizations can improve performance, they may sometimes introduce unexpected behavior or vulnerabilities. Understanding the impact of different optimization levels is crucial for maintaining contract security while improving efficiency.</i>
+</details>
+
+<details>
 <summary><strong>Is the build output deterministic and verifiable?</strong></summary>
 <i>Deterministic builds ensure that the same code produces the same bytecode every time, which is critical for verifying contract deployments and preventing supply chain attacks. Non-deterministic builds can lead to discrepancies between the audited code and the deployed contract, undermining trust in the contract's security.</i>
 </details>
@@ -87,11 +92,26 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 <i>Ensuring integer safety at runtime or compile-time is critical to prevent financial exploits and maintain contract integrity. Overflow and underflow vulnerabilities have led to major exploits in the past, and having built-in safeguards is essential for protecting smart contract funds.</i>
 </details>
 
+<details>
+<summary><strong>Does the language offer secure random number generation primitives?</strong></summary>
+<i>Predictable or manipulable random number generation can lead to exploits in contracts relying on randomness. Secure, built-in random number generation helps prevent such vulnerabilities and ensures fair execution of random-dependent logic.</i>
+</details>
+
+<details>
+<summary><strong>Does the language enforce proper array bounds checking?</strong></summary>
+<i>Improper array bounds checking can lead to buffer overflow vulnerabilities, potentially allowing attackers to read or write to unintended memory locations. Built-in bounds checking mechanisms can prevent these vulnerabilities, enhancing overall contract security.</i>
+</details>
+
 ## 4. Concurrency and Parallelism
 
 <details>
 <summary><strong>Does the language provide primitives for managing concurrent state updates?</strong></summary>
 <i>In parallel execution environments, race conditions can lead to inconsistent state. Proper synchronization primitives are necessary to maintain consistency. Race conditions can lead to unexpected behaviors, allowing attackers to manipulate the contract state to their advantage.</i>
+</details>
+
+<details>
+<summary><strong>How does the language handle atomic transactions and rollbacks in case of errors?</strong></summary>
+<i>Atomic transactions ensure that all operations within a transaction either complete successfully or are rolled back entirely. This feature is crucial for maintaining contract state consistency, especially in complex multi-step operations.</i>
 </details>
 
 <details>
@@ -114,6 +134,11 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 <details>
 <summary><strong>Are state variables explicitly marked as mutable or immutable?</strong></summary>
 <i>Explicitly marking state variables improves code readability and reduces the likelihood of accidental state changes. Immutable state variables help prevent unintended modifications, which can lead to vulnerabilities or inconsistent contract behavior.</i>
+</details>
+
+<details>
+<summary><strong>Does the language provide mechanisms for efficient state pruning or archiving?</strong></summary>
+<i>As contracts accumulate state over time, efficient mechanisms for state management become crucial. Features that allow for state pruning or archiving can help maintain contract performance and reduce storage costs over the long term.</i>
 </details>
 
 ## 6. Performance and Gas Efficiency
