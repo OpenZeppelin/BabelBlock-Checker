@@ -1,23 +1,19 @@
 # LangCheck: Smart Contract Language Audit Checklist
 
->[!tip]
->**Pro Tip**: Bookmark this checklist and revisit it regularly to stay updated with best practices in smart contract language auditing.
+> **Pro Tip**: Bookmark this checklist and revisit it regularly to stay updated with best practices in smart contract language auditing.
 
 ## How to Use This Checklist
 
 LangCheck is a comprehensive checklist designed for auditors evaluating the security, reliability, and maintainability of smart contract languages. It helps auditors systematically review aspects of a language that can impact the quality and security of the smart contracts developed with it.
 
-This checklist is organized into distinct categories, each addressing a particular aspect of smart contract development. Each item includes an explanation, hidden behind a toggle for ease of reading, explaining why the check is important and the risks or security concerns it addresses. By following the checklist, auditors can ensure that they don't overlook any critical areas and can gain a thorough understanding of the strengths and weaknesses of the language under review.
+This checklist is organized into distinct categories, each addressing a particular aspect of smart contract development. Each item includes explanations of the objectives, potential issues, and references to help auditors understand the importance of each check.
 
 To use the checklist effectively:
-1. Review the categories and choose those relevant to your audit focus. Multiple aspects may need to be considered simultaneously, as some language features can impact different areas of security, performance, and reliability.
-2. Check each item to understand the rationale and context. The explanations provide deeper insights into why a particular aspect is important, helping assess the risks associated with the language.
-3. Proceed through each item systematically to ensure a comprehensive review. A systematic approach helps ensure that no critical aspects are missed and that all potential vulnerabilities are identified.
+1. Review the categories and choose those relevant to your audit focus.
+2. Check each item to understand the rationale and context.
+3. Proceed through each item systematically to ensure a comprehensive review.
 
 Auditors are encouraged to take notes while progressing through the checklist, as these notes can be valuable for communicating findings to stakeholders and for creating detailed audit reports. LangCheck can also be used iteratively—returning to the checklist during different stages of the audit can help confirm that all issues are addressed.
-
->[!NOTE] 
-> Click the toggle of each item to see the explanation behind.
 
 ## Table of Contents
 1. [Language Syntax and Semantics](#1-language-syntax-and-semantics)
@@ -31,175 +27,111 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 9. [Code Readability and Maintainability](#9-code-readability-and-maintainability)
 10. [Dependency Management](#10-dependency-management)
 
+---
+
 ## 1. Language Syntax and Semantics
 
-<details>
-<summary><strong>Does the language have a strong, static type system?</strong></summary>
-<i>A strong, static type system can prevent many runtime errors and vulnerabilities by catching type-related issues at compile-time. This reduces the likelihood of unexpected behavior in deployed contracts and enhances overall security.</i>
-</details>
 
-<details>
-<summary><strong>Are there safeguards against common type-related vulnerabilities?</strong></summary>
-<i>Type confusion and unsafe type casting can lead to severe vulnerabilities. Built-in safeguards against these issues can significantly reduce the risk of exploitation and improve contract reliability.</i>
-</details>
+| Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| LS-001     | Function Selector Management | Ensure that selectors are uniquely and predictably generated, preventing collisions. Arbitrary selectors should not be allowed, and overloaded functions must produce distinct selectors. | <ul><li>Function selector collisions, leading to incorrect function execution</li><li>Proxy selector clashing in upgradeable contracts</li><li>Misrouting of calls due to poor handling of overloaded functions</li><li>Backdoor creation via custom selectors</li></ul> | <ul><li>[Example issue](https://blog.openzeppelin.com/stylus-rust-sdk-audit#custom-selectors-could-facilitate-proxy-selector-clashing-attack)</li></ul> |
+| LS-002     | Strong, Static Type System   | Ensure the language has a strong, static type system to catch type-related issues at compile-time, reducing runtime errors and vulnerabilities.          | <ul><li>Runtime errors due to type mismatches</li><li>Type-related vulnerabilities</li><li>Unexpected behavior in deployed contracts</li></ul>          | None              |
+| LS-003     | Type-Related Vulnerability Safeguards | Ensure the language provides safeguards against common type-related vulnerabilities, such as type confusion and unsafe type casting, to improve security and reliability. | <ul><li>Type confusion vulnerabilities</li><li>Exploitation via unsafe type casting</li><li>Reduced contract reliability due to type issues</li></ul> | None |
+| LS-004     | Event Emissions and Logging  | Ensure the language provides efficient and standardized mechanisms for event emissions and logging to enhance transparency and facilitate off-chain monitoring. | <ul><li>Inefficient or non-standard event logging</li><li>Difficulties in off-chain monitoring and indexing</li><li>Reduced transparency of contract activities</li></ul> | None              |
+| LS-005     | Misleading or Undefined Keywords | Ensure the language does not allow misleading or undefined keywords that can deceive reviewers and introduce hard-to-detect vulnerabilities.            | <ul><li>Deception of code reviewers</li><li>Hard-to-detect vulnerabilities</li><li>Misunderstandings of code intent</li><li>Difficulty spotting vulnerabilities during code review</li></ul> | None              |
+| LS-006     | Explicit State Mutability Declarations | Ensure the language requires explicit declaration of state mutability to prevent unexpected behaviors and potential vulnerabilities due to implicit state changes. | <ul><li>Unexpected behaviors from implicit state mutability</li><li>Vulnerabilities due to unintended state changes</li><li>Challenges in maintaining contract integrity</li><li>Unauthorized state modifications</li></ul> | None |
 
-<details>
-<summary><strong>Does the language allow developers to define arbitrary custom selectors for functions?</strong></summary>
-<i>Custom selectors can lead to collisions, especially in proxy patterns. Ensuring proper checks helps avoid introducing backdoors or making malicious code harder to detect. This is especially important in the context of contract upgrades and dispatchers that rely on unique selectors to route function calls correctly.</i>
-</details>
-
-<details>
-<summary><strong>How does the language handle event emissions and logging?</strong></summary>
-<i>Efficient and standardized event logging is essential for off-chain monitoring and indexing. Proper event handling can improve transparency and facilitate better tracking of contract activities.</i>
-</details>
-
-<details>
-<summary><strong>Does the language allow misleading or undefined keywords?</strong></summary>
-<i>Allowing undefined keywords or misleading notation can be exploited to deceive reviewers and introduce vulnerabilities that are difficult to detect. Such features can lead to misunderstandings of the code's intent and make it harder to spot potential vulnerabilities during code review.</i>
-</details>
-
-<details>
-<summary><strong>Does the language default to state mutability when not explicitly declared?</strong></summary>
-<i>Implicit state mutability can lead to unexpected behaviors and potential vulnerabilities, especially in environments where state consistency is crucial. Explicitly declaring state mutability makes it clear when state changes are occurring, which is essential for maintaining contract integrity and preventing unauthorized modifications.</i>
-</details>
+---
 
 ## 2. Compiler and Tooling
 
-<details>
-<summary><strong>Is the compilation process clear, and do errors provide sufficient information?</strong></summary>
-<i>Clear compiler errors are crucial for identifying issues quickly. Cryptic error messages can delay development and increase the risk of undetected vulnerabilities. A good compiler should provide meaningful feedback that helps developers understand what went wrong and how to fix it.</i>
-</details>
 
-<details>
-<summary><strong>Does the compiler offer optimization options that could potentially introduce vulnerabilities?</strong></summary>
-<i>While compiler optimizations can improve performance, they may sometimes introduce unexpected behavior or vulnerabilities. Understanding the impact of different optimization levels is crucial for maintaining contract security while improving efficiency.</i>
-</details>
+| Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| CT-001     | Compiler Error Clarity       | Ensure the compilation process is clear, and the compiler provides sufficient, meaningful error information to aid in quick identification and resolution of issues. | <ul><li>Delayed development due to cryptic errors</li><li>Undetected vulnerabilities</li><li>Difficulty in fixing issues</li></ul>                      | None              |
+| CT-002     | Compiler Optimization Safety | Ensure compiler optimizations do not introduce unexpected behavior or vulnerabilities, maintaining contract security while improving performance.        | <ul><li>Unexpected behavior from optimizations</li><li>Vulnerabilities introduced by optimizations</li><li>Compromised contract security</li></ul>     | None              |
+| CT-003     | Deterministic and Verifiable Builds | Ensure the build output is deterministic and verifiable, so the same code always produces the same bytecode, aiding in verification and preventing supply chain attacks. | <ul><li>Discrepancies between audited code and deployed contract</li><li>Supply chain attack vulnerabilities</li><li>Undermined trust in security</li></ul> | None |
 
-<details>
-<summary><strong>Is the build output deterministic and verifiable?</strong></summary>
-<i>Deterministic builds ensure that the same code produces the same bytecode every time, which is critical for verifying contract deployments and preventing supply chain attacks. Non-deterministic builds can lead to discrepancies between the audited code and the deployed contract, undermining trust in the contract's security.</i>
-</details>
+---
 
 ## 3. Security Features and Vulnerabilities
 
-<details>
-<summary><strong>Does the language provide built-in reentrancy protection?</strong></summary>
-<i>Reentrancy attacks can drain contracts of funds. Built-in reentrancy protection helps prevent these attacks, reducing reliance on developer awareness alone. Languages that provide primitives for managing reentrancy can help developers avoid common pitfalls and write more secure code by default.</i>
-</details>
 
-<details>
-<summary><strong>Are there built-in mechanisms to prevent overflow and underflow vulnerabilities?</strong></summary>
-<i>Ensuring integer safety at runtime or compile-time is critical to prevent financial exploits and maintain contract integrity. Overflow and underflow vulnerabilities have led to major exploits in the past, and having built-in safeguards is essential for protecting smart contract funds.</i>
-</details>
+| Ref Number | Name                               | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| SV-001     | Built-in Reentrancy Protection     | Ensure the language provides built-in reentrancy protection mechanisms to prevent reentrancy attacks and enhance contract security.                      | <ul><li>Reentrancy attacks causing fund loss</li><li>Dependence on developer awareness</li><li>Common security pitfalls</li></ul>                       | None              |
+| SV-002     | Integer Overflow/Underflow Protection | Ensure the language provides built-in mechanisms to prevent integer overflow and underflow vulnerabilities, maintaining contract integrity and security. | <ul><li>Financial exploits via integer overflow/underflow</li><li>Contract integrity compromise</li><li>Loss of funds</li></ul>                        | None              |
+| SV-003     | Secure Random Number Generation    | Ensure the language offers secure random number generation primitives to prevent exploits due to predictable or manipulable randomness.                  | <ul><li>Exploits from predictable randomness</li><li>Manipulation of random-dependent logic</li><li>Unfair execution</li></ul>                          | None              |
+| SV-004     | Array Bounds Checking Enforcement  | Ensure the language enforces proper array bounds checking to prevent buffer overflow vulnerabilities and unauthorized memory access.                    | <ul><li>Buffer overflow vulnerabilities</li><li>Unauthorized memory access</li><li>Security breaches</li></ul>                                         | None              |
 
-<details>
-<summary><strong>Does the language offer secure random number generation primitives?</strong></summary>
-<i>Predictable or manipulable random number generation can lead to exploits in contracts relying on randomness. Secure, built-in random number generation helps prevent such vulnerabilities and ensures fair execution of random-dependent logic.</i>
-</details>
-
-<details>
-<summary><strong>Does the language enforce proper array bounds checking?</strong></summary>
-<i>Improper array bounds checking can lead to buffer overflow vulnerabilities, potentially allowing attackers to read or write to unintended memory locations. Built-in bounds checking mechanisms can prevent these vulnerabilities, enhancing overall contract security.</i>
-</details>
+---
 
 ## 4. Concurrency and Parallelism
 
-<details>
-<summary><strong>Does the language provide primitives for managing concurrent state updates?</strong></summary>
-<i>In parallel execution environments, race conditions can lead to inconsistent state. Proper synchronization primitives are necessary to maintain consistency. Race conditions can lead to unexpected behaviors, allowing attackers to manipulate the contract state to their advantage.</i>
-</details>
 
-<details>
-<summary><strong>How does the language handle atomic transactions and rollbacks in case of errors?</strong></summary>
-<i>Atomic transactions ensure that all operations within a transaction either complete successfully or are rolled back entirely. This feature is crucial for maintaining contract state consistency, especially in complex multi-step operations.</i>
-</details>
+| Ref Number | Name                               | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| CP-001     | Concurrent State Update Management | Ensure the language provides primitives for managing concurrent state updates to prevent race conditions and maintain state consistency.                 | <ul><li>Race conditions causing inconsistent state</li><li>Unexpected behaviors</li><li>State manipulation by attackers</li></ul>                       | None              |
+| CP-002     | Atomic Transactions and Error Handling | Ensure the language supports atomic transactions and rollback mechanisms to maintain state consistency in case of errors.                                | <ul><li>Inconsistent state from partial execution</li><li>Locked funds or incomplete operations</li><li>Vulnerability during errors</li></ul>          | None              |
+| CP-003     | Explicit Native Asset Handling     | Ensure contracts cannot receive native assets without explicit handling to prevent unintended behaviors and vulnerabilities.                            | <ul><li>Unintended receipt of native assets</li><li>Vulnerabilities from unanticipated transfers</li><li>Unpredictable behavior</li></ul>              | None              |
 
-<details>
-<summary><strong>Can contracts receive native assets without explicit handling?</strong></summary>
-<i>Implicitly accepting native assets can lead to unintended behavior or vulnerabilities, especially if the developer does not anticipate such transfers. Explicit handling of native assets ensures that the contract behaves predictably when receiving funds and that appropriate security checks are in place.</i>
-</details>
+---
 
 ## 5. Storage and State Management
 
-<details>
-<summary><strong>How does the language manage storage layout, particularly for upgradable contracts?</strong></summary>
-<i>Consistent and predictable storage layouts help prevent collisions and ensure state integrity, especially for contracts that are upgraded over time. Storage collisions can corrupt the contract state, leading to vulnerabilities that are difficult to detect and exploit.</i>
-</details>
+| Ref Number | Name                               | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| SM-001     | Storage Layout Management for Upgradability | Ensure the language manages storage layout consistently and predictably, especially for upgradable contracts, to prevent storage collisions and maintain state integrity. | <ul><li>Storage collisions corrupting state</li><li>Difficult-to-detect vulnerabilities</li><li>Compromised state integrity during upgrades</li></ul> | None              |
+| SM-002     | Native Upgradeable Contract Support | Ensure the language provides native support for upgradeable contract patterns to standardize and secure the upgrade process.                             | <ul><li>Complex upgrade processes</li><li>Security vulnerabilities in upgrades</li><li>State inconsistencies during upgrades</li></ul>                 | <ul><li>[ink! Upgradeable Contracts](https://use.ink/basics/upgradeable-contracts#replacing-contract-code-with-set_code_hash)</li></ul> |
+| SM-003     | Explicit Mutability of State Variables | Ensure state variables are explicitly marked as mutable or immutable to prevent unintended modifications and enhance code readability.                   | <ul><li>Accidental state changes</li><li>Vulnerabilities from unintended modifications</li><li>Inconsistent behavior</li></ul>                         | None              |
+| SM-004     | Efficient State Pruning and Archiving | Ensure the language provides mechanisms for efficient state pruning or archiving to maintain contract performance and manage storage costs.              | <ul><li>Performance degradation from accumulated state</li><li>High storage costs</li><li>Inefficient state management</li></ul>                       | None              |
 
-<details>
-<summary><strong>Does the language provide native support for upgradeable contract patterns?</strong></summary>
-<i>Native support for upgradeability can help standardize and secure the process of contract upgrades. Some languages, like ink!, offer efficient upgradeability mechanisms that move away from traditional proxy patterns. For example, ink! provides the <code>set_code_hash()</code> function for direct code replacement. This approach simplifies upgrades and preserves contract state. For details on this method and its implementation, refer to the ink! <a href="https://use.ink/basics/upgradeable-contracts#replacing-contract-code-with-set_code_hash">documentation</a>.</i>
-</details>
-
-<details>
-<summary><strong>Are state variables explicitly marked as mutable or immutable?</strong></summary>
-<i>Explicitly marking state variables improves code readability and reduces the likelihood of accidental state changes. Immutable state variables help prevent unintended modifications, which can lead to vulnerabilities or inconsistent contract behavior.</i>
-</details>
-
-<details>
-<summary><strong>Does the language provide mechanisms for efficient state pruning or archiving?</strong></summary>
-<i>As contracts accumulate state over time, efficient mechanisms for state management become crucial. Features that allow for state pruning or archiving can help maintain contract performance and reduce storage costs over the long term.</i>
-</details>
+---
 
 ## 6. Performance and Gas Efficiency
 
-<details>
-<summary><strong>Are there scenarios where gas is charged incorrectly (overpriced or underpriced)?</strong></summary>
-<i>Inefficient gas handling can lead to denial-of-service scenarios or unnecessary costs for users. Auditing gas efficiency is critical for contract reliability. Ensuring gas is charged correctly helps maintain network stability and prevents abusive behaviors that could exploit inefficient gas accounting.</i>
-</details>
+| Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| PE-001     | Correct Gas Charging         | Ensure gas is charged correctly to prevent denial-of-service scenarios and unnecessary costs, maintaining contract reliability and network stability.   | <ul><li>Denial-of-service attacks</li><li>Unnecessary user costs</li><li>Exploitation of gas accounting</li><li>Network instability</li></ul>          | None              |
+| PE-002     | Contract Size Optimization   | Ensure the build output is optimized for size to reduce deployment costs and meet platform size constraints.                                             | <ul><li>High deployment costs</li><li>Exceeding size limits</li><li>Deployment failures</li><li>Need for refactoring</li></ul>                         | None              |
 
-<details>
-<summary><strong>Does the build output result in a large contract size?</strong></summary>
-<i>Large contract sizes may lead to higher deployment costs and exceed size limits imposed by blockchain platforms, necessitating optimizations. Optimizing contract size is crucial for reducing deployment costs and ensuring that the contract can be deployed within the constraints of the target platform.</i>
-</details>
+---
 
 ## 7. Error Handling and Exception Safety
 
-<details>
-<summary><strong>Are errors properly propagated and handled, both within contracts and during external calls?</strong></summary>
-<i>Proper error handling ensures that contract execution remains predictable and that unexpected conditions do not lead to vulnerabilities or locked funds. Ensuring errors are properly propagated allows developers to write contracts that handle failures gracefully, reducing the risk of funds being permanently locked due to unforeseen issues.</i>
-</details>
+| Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| EH-001     | Error Propagation and Handling | Ensure errors are properly propagated and handled within contracts and during external calls to maintain predictable execution and prevent vulnerabilities. | <ul><li>Unpredictable execution</li><li>Locked funds</li><li>Vulnerabilities from unhandled errors</li><li>Failure recovery issues</li></ul>           | None              |
+| EH-002     | Adequate Debugging Tools     | Ensure the language provides adequate debugging tools to assist developers in identifying and fixing issues during development and auditing.             | <ul><li>Difficulty fixing issues</li><li>Missed vulnerabilities</li><li>Increased development time</li><li>Reduced code quality</li></ul>              | None              |
 
-<details>
-<summary><strong>Does the language provide adequate debugging tools?</strong></summary>
-<i>Debugging tools are essential for identifying and fixing issues, especially during the development and auditing phases. A lack of proper debugging tools can make it difficult for developers to understand how their contracts behave, leading to missed vulnerabilities and errors.</i>
-</details>
+---
 
 ## 8. Documentation and Community Support
 
-<details>
-<summary><strong>Is the language documentation up to date and consistent with the current state of the language?</strong></summary>
-<i>Up-to-date documentation ensures developers and auditors have the correct information, reducing misunderstandings and mistakes. Inconsistent or outdated documentation can lead to incorrect assumptions about the language's behavior, resulting in vulnerabilities or inefficient code.</i>
-</details>
+| Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| DC-001     | Up-to-date and Consistent Documentation | Ensure the language documentation is up to date and consistent with the current state of the language to provide accurate information to developers and auditors. | <ul><li>Misunderstandings due to outdated docs</li><li>Incorrect assumptions</li><li>Vulnerabilities introduced</li><li>Inefficient code</li></ul>     | None              |
+| DC-002     | Active Community and Support Channels | Ensure the language has an active community and available support channels to assist developers and contribute to language improvements.                 | <ul><li>Lack of support</li><li>Unaddressed security issues</li><li>Slower evolution</li><li>Developers lacking resources</li></ul>                    | None              |
 
-<details>
-<summary><strong>Does the language have an active community and available support channels?</strong></summary>
-<i>A strong community can provide timely support, identify potential issues, and contribute to language improvements. Active community engagement helps ensure that the language evolves to address security concerns and that developers have access to the resources they need.</i>
-</details>
+---
 
 ## 9. Code Readability and Maintainability
 
-<details>
-<summary><strong>Is the language syntax designed for readability and clarity?</strong></summary>
-<i>A language that promotes readability helps developers write secure code and reduces the likelihood of mistakes that lead to vulnerabilities. Readable syntax makes it easier for both developers and auditors to understand the code's intent, leading to fewer misunderstandings and a lower risk of errors.</i>
-</details>
 
-<details>
-<summary><strong>Does the language encourage or enforce proper commenting practices?</strong></summary>
-<i>Proper comments and documentation help future maintainers understand the code, reducing the risk of introducing bugs during updates. Enforcing good commenting practices ensures that important information about the code's behavior, limitations, and intent is preserved for future developers.</i>
-</details>
+| Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| CM-001     | Syntax Readability and Clarity | Ensure the language syntax is designed for readability and clarity to help developers write secure code and reduce mistakes.                            | <ul><li>Coding mistakes</li><li>Difficulty understanding code</li><li>Misunderstandings</li><li>Increased errors</li></ul>                             | None              |
+| CM-002     | Encouragement of Proper Commenting Practices | Ensure the language encourages or enforces proper commenting practices to aid future maintainers and reduce bugs during updates.                         | <ul><li>Misunderstandings during maintenance</li><li>Introduction of bugs</li><li>Loss of code intent information</li><li>Difficulty updating code</li></ul> | None              |
+
+---
 
 ## 10. Dependency Management
 
-<details>
-<summary><strong>Are there mechanisms to audit or verify dependencies?</strong></summary>
-<i>Dependencies can introduce vulnerabilities if not properly audited. Ensuring all dependencies are secure is crucial for overall contract security. Proper auditing mechanisms help identify and mitigate risks associated with third-party code, reducing the attack surface of the contract.</i>
-</details>
 
-<details>
-<summary><strong>Does the language ecosystem provide protection against dependency hijacking?</strong></summary>
-<i>Dependency hijacking can lead to malicious code being introduced into contracts. Proper verification mechanisms help mitigate this risk. Protecting against dependency hijacking ensures that only trusted code is included in the contract, preventing potential backdoors and malicious behaviors.</i>
-</details>
+| Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
+|------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| DM-001     | Dependency Auditing and Verification | Ensure there are mechanisms to audit or verify dependencies to maintain overall contract security.                                                      | <ul><li>Vulnerabilities from dependencies</li><li>Risks from third-party code</li><li>Increased attack surface</li><li>Compromised security</li></ul>  | None              |
+| DM-002     | Protection Against Dependency Hijacking | Ensure the language ecosystem provides protection against dependency hijacking to prevent malicious code inclusion.                                      | <ul><li>Malicious code introduction</li><li>Backdoors in contracts</li><li>Compromised security</li><li>Trust issues</li></ul>                         | None              |
 
 ---
 
