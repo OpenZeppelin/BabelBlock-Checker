@@ -141,4 +141,4 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 
 We encourage the community to contribute to BabelBlk Checker by suggesting additional checklist items, best practices, or improvements. Your input can help make this checklist even more comprehensive and useful for smart contract language audits. Feel free to submit your suggestions or contribute to the ongoing discussion to help improve smart contract security for everyone.
 
-**[Contribute to BabelBlk Checker](#)**
+**[Contribute to BabelBlk Checker](https://github.com/OpenZeppelin/BabelBlk-Checker/blob/main/CONTRIBUTING.md)**
