@@ -1,10 +1,11 @@
-# LangCheck: Smart Contract Language Audit Checklist
+# BabelBlk Checker: Smart Contract Language Audit Checklist
 
-> **Pro Tip**: Bookmark this checklist and revisit it regularly to stay updated with best practices in smart contract language auditing.
+>[!tip]
+>**Pro Tip**: Bookmark this checklist and revisit it regularly to stay updated with best practices in smart contract language auditing.
 
 ## How to Use This Checklist
 
-LangCheck is a comprehensive checklist designed for auditors evaluating the security, reliability, and maintainability of smart contract languages. It helps auditors systematically review aspects of a language that can impact the quality and security of the smart contracts developed with it.
+BabelBlk Checker is a comprehensive checklist designed for auditors evaluating the security, reliability, and maintainability of smart contract languages. It helps auditors systematically review aspects of a language that can impact the quality and security of the smart contracts developed with it.
 
 This checklist is organized into distinct categories, each addressing a particular aspect of smart contract development. Each item includes explanations of the objectives, potential issues, and references to help auditors understand the importance of each check.
 
@@ -13,7 +14,7 @@ To use the checklist effectively:
 2. Check each item to understand the rationale and context.
 3. Proceed through each item systematically to ensure a comprehensive review.
 
-Auditors are encouraged to take notes while progressing through the checklist, as these notes can be valuable for communicating findings to stakeholders and for creating detailed audit reports. LangCheck can also be used iteratively—returning to the checklist during different stages of the audit can help confirm that all issues are addressed.
+Auditors are encouraged to take notes while progressing through the checklist, as these notes can be valuable for communicating findings to stakeholders and for creating detailed audit reports. BabelBlk Checker can also be used iteratively—returning to the checklist during different stages of the audit can help confirm that all issues are addressed.
 
 ## Table of Contents
 1. [Language Syntax and Semantics](#1-language-syntax-and-semantics)
@@ -137,6 +138,6 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 
 ## 🌟 Community Contributions Welcome! 🌟
 
-We encourage the community to contribute to LangCheck by suggesting additional checklist items, best practices, or improvements. Your input can help make this checklist even more comprehensive and useful for smart contract language audits. Feel free to submit your suggestions or contribute to the ongoing discussion to help improve smart contract security for everyone.
+We encourage the community to contribute to BabelBlk Checker by suggesting additional checklist items, best practices, or improvements. Your input can help make this checklist even more comprehensive and useful for smart contract language audits. Feel free to submit your suggestions or contribute to the ongoing discussion to help improve smart contract security for everyone.
 
-**[Contribute to LangCheck](#)**
+**[Contribute to BabelBlk Checker](#)**
