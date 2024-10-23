@@ -24,9 +24,8 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 5. [Storage and State Management](#5-storage-and-state-management)
 6. [Performance and Gas Efficiency](#6-performance-and-gas-efficiency)
 7. [Error Handling and Exception Safety](#7-error-handling-and-exception-safety)
-8. [Documentation and Community Support](#8-documentation-and-community-support)
-9. [Code Readability and Maintainability](#9-code-readability-and-maintainability)
-10. [Dependency Management](#10-dependency-management)
+8. [Code Quality and Maintainability](#8-code-quality-and-maintainability)
+9. [Dependency Management](#9-dependency-management)
 
 ---
 
@@ -108,26 +107,17 @@ Auditors are encouraged to take notes while progressing through the checklist, a
 
 ---
 
-## 8. Documentation and Community Support
+## 8. Code Quality and Maintainability
 
 | Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
 |------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
-| DC-001     | Up-to-date and Consistent Documentation | Ensure the language documentation is up to date and consistent with the current state of the language to provide accurate information to developers and auditors. | <ul><li>Misunderstandings due to outdated docs</li><li>Incorrect assumptions</li><li>Vulnerabilities introduced</li><li>Inefficient code</li></ul>     | None              |
-| DC-002     | Active Community and Support Channels | Ensure the language has an active community and available support channels to assist developers and contribute to language improvements.                 | <ul><li>Lack of support</li><li>Unaddressed security issues</li><li>Slower evolution</li><li>Developers lacking resources</li></ul>                    | None              |
-
+| CM-001     | Up-to-date and Consistent Documentation | Ensure the language documentation is up to date and consistent with the current state of the language to provide accurate information to developers and auditors. | <ul><li>Misunderstandings due to outdated docs</li><li>Incorrect assumptions</li><li>Vulnerabilities introduced</li><li>Inefficient code</li></ul>     | None              |
+| CM-002     | Active Community and Support Channels | Ensure the language has an active community and available support channels to assist developers and contribute to language improvements.                 | <ul><li>Lack of support</li><li>Unaddressed security issues</li><li>Slower evolution</li><li>Developers lacking resources</li></ul>                    | None              |
+| CM-003     | Syntax Readability and Clarity | Ensure the language syntax is designed for readability and clarity to help developers write secure code and reduce mistakes.                            | <ul><li>Coding mistakes</li><li>Difficulty understanding code</li><li>Misunderstandings</li><li>Increased errors</li></ul>                             | None              |
+| CM-004     | Encouragement of Proper Commenting Practices | Ensure the language encourages or enforces proper commenting practices to aid future maintainers and reduce bugs during updates.                         | <ul><li>Misunderstandings during maintenance</li><li>Introduction of bugs</li><li>Loss of code intent information</li><li>Difficulty updating code</li></ul> | None              |
 ---
 
-## 9. Code Readability and Maintainability
-
-
-| Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
-|------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
-| CM-001     | Syntax Readability and Clarity | Ensure the language syntax is designed for readability and clarity to help developers write secure code and reduce mistakes.                            | <ul><li>Coding mistakes</li><li>Difficulty understanding code</li><li>Misunderstandings</li><li>Increased errors</li></ul>                             | None              |
-| CM-002     | Encouragement of Proper Commenting Practices | Ensure the language encourages or enforces proper commenting practices to aid future maintainers and reduce bugs during updates.                         | <ul><li>Misunderstandings during maintenance</li><li>Introduction of bugs</li><li>Loss of code intent information</li><li>Difficulty updating code</li></ul> | None              |
-
----
-
-## 10. Dependency Management
+## 9. Dependency Management
 
 
 | Ref Number | Name                         | Objective                                                                                                                                               | Potential Issues                                                                                                                                       | References        |
