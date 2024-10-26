@@ -21,7 +21,7 @@ Please select the type of contribution you are making:
 <!--
 Before submitting your pull request, please ensure you have completed the following:
 -->
-- [ ] My contribution follows the [Contribution Guidelines](CONTRIBUTING.md).
-- [ ] I have checked that there are no open [Pull Requests](../../pulls) for the same change.
+- [ ] My contribution follows the [Contribution Guidelines](https://github.com/OpenZeppelin/BabelBlk-Checker/blob/main/CONTRIBUTING.md).
+- [ ] I have checked that there are no open [Pull Requests](https://github.com/OpenZeppelin/BabelBlk-Checker/pulls) for the same change.
 - [ ] I have verified that my contribution does not duplicate existing content.
 - [ ] I have run spellcheck and proofread my contribution for clarity and correctness.
