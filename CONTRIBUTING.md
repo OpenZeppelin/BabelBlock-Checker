@@ -77,14 +77,15 @@ When adding or editing checklist items, please adhere to the following format to
 - **Name**: Provide a concise, descriptive title for the checklist item.
 - **Objective**: Clearly state the goal of the checklist item and its importance in auditing.
 - **Potential Issues**: List potential problems that could arise if the item is not addressed, formatted as a bulleted list.
-- **References**: Include any relevant links or citations that support the item.
+
+**Note:** Include any relevant links or citations that support the item.
 
 #### Example Template
 
 ```markdown
-| Ref Number | Name                         | Objective | Potential Issues | References |
-|------------|------------------------------|-----------|------------------|------------|
-| XX-XXX     | [Checklist Item Name]        | [Objective] | <ul><li>[Issue 1]</li><li>[Issue 2]</li></ul> | <ul><li>[Reference 1](#)</li></ul> |
+| Ref Number | Name                         | Objective | Potential Issues |
+|------------|------------------------------|-----------|------------------|
+| XX-XXX     | [Checklist Item Name]        | [Objective] | <ul><li>[Issue 1]</li><li>[Issue 2]</li></ul> |
 ```
 
 ---
