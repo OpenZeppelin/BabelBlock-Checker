@@ -21,4 +21,7 @@ This section assists auditors in evaluating how the language supports developers
 
 For more information, see also:
 
-*No additional references.*
+- **[Essential Debugging Tools for Smart Contracts Explained](https://thecryptocortex.com/debugging-tools-for-smart-contracts/)**
+- **[A06:2021 – Vulnerable and Outdated Components](https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/)**
+- **[A Pentester’s Guide to Dependency Confusion Attacks](https://www.cobalt.io/blog/a-pentesters-guide-to-dependency-confusion-attacks)**
+- **[Vulnerable Dependency Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerable_Dependency_Management_Cheat_Sheet.html)**
