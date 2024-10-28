@@ -23,3 +23,7 @@ This section assists auditors in evaluating the language's ability to manage sta
 For more information, see also:
 
 - **[ink! Upgradeable Contracts](https://use.ink/basics/upgradeable-contracts#replacing-contract-code-with-set_code_hash)**
+- **[State Pruning Mechanism in Solana - Rent Fee](https://solana.com/docs/core/fees#rent)**
+- **[Sealevel — Parallel Processing Thousands of Smart Contracts](https://medium.com/solana-labs/sealevel-parallel-processing-thousands-of-smart-contracts-d814b378192)**
+- **[https://www.monad.xyz/post/parallel-execution-monad](https://www.monad.xyz/post/parallel-execution-monad)**
+- **[What is Atomic Composability?](https://learn.radixdlt.com/article/what-is-atomic-composability)**
