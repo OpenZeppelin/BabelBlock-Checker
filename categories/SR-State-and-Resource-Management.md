@@ -24,6 +24,7 @@ For more information, see also:
 
 - **[ink! Upgradeable Contracts](https://use.ink/basics/upgradeable-contracts#replacing-contract-code-with-set_code_hash)**
 - **[State Pruning Mechanism in Solana - Rent Fee](https://solana.com/docs/core/fees#rent)**
+- **[What is the Existential Deposit? - Polkadot](https://support.polkadot.network/support/solutions/articles/65000168651-what-is-the-existential-deposit-)**
 - **[Sealevel — Parallel Processing Thousands of Smart Contracts](https://medium.com/solana-labs/sealevel-parallel-processing-thousands-of-smart-contracts-d814b378192)**
-- **[https://www.monad.xyz/post/parallel-execution-monad](https://www.monad.xyz/post/parallel-execution-monad)**
+- **[Parallel Execution & Monad](https://www.monad.xyz/post/parallel-execution-monad)**
 - **[What is Atomic Composability?](https://learn.radixdlt.com/article/what-is-atomic-composability)**
