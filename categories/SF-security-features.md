@@ -27,5 +27,5 @@ For more information, see also:
 - **[Solidity Docs - Reentrancy](https://docs.soliditylang.org/en/latest/security-considerations.html#reentrancy)**
 - **[Interesting discussion - disallow state-changing effects after an external call by default](https://github.com/ethereum/solidity/issues/12996)**
 - **[New batchOverflow Bug in Multiple ERC20 Smart Contracts (CVE-2018–10299)](https://peckshield.medium.com/alert-new-batchoverflow-bug-in-multiple-erc20-smart-contracts-cve-2018-10299-511067db6536)**
-- **[https://aptos.dev/en/build/smart-contracts/move-security-guidelines](https://aptos.dev/en/build/smart-contracts/move-security-guidelines)**
+- **[`move` security guidelines](https://aptos.dev/en/build/smart-contracts/move-security-guidelines)**
 - **[Cairo Security Flaws](https://oxor.io/blog/2024-08-16-cairo-security-flaws/)**
