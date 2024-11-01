@@ -1,6 +1,6 @@
-# Contributing to BabelBlk Checker
+# Contributing to BabelBlock Checker
 
-Thank you for your interest in contributing to **BabelBlk Checker**! Your contributions help make this checklist a valuable resource for auditors and developers in the smart contract community. Whether you're suggesting new checklist items, improving existing content, or enhancing the documentation, your input is greatly appreciated.
+Thank you for your interest in contributing to **BabelBlock Checker**! Your contributions help make this checklist a valuable resource for auditors and developers in the smart contract community. Whether you're suggesting new checklist items, improving existing content, or enhancing the documentation, your input is greatly appreciated.
 
 ## Table of Contents
 
@@ -100,7 +100,7 @@ When adding or editing checklist items, please adhere to the following format to
 
 1. **Clone**: Clone your forked repository to your local machine.
    ```bash
-   git clone https://github.com/your-username/babelblk-checker.git
+   git clone https://github.com/your-username/babelblock-checker.git
    ```
 2. **Branch**: Create a new branch for your contribution.
    ```bash
