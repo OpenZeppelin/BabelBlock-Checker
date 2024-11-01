@@ -17,6 +17,7 @@ This section helps auditors evaluate the language's ability to facilitate secure
 | LI-007    | Error Propagation and Handling             | Ensure errors are properly propagated and handled within contracts and during external calls to maintain predictable execution and prevent vulnerabilities. | <ul><li>Unpredictable execution</li><li>Locked funds</li><li>Vulnerabilities from unhandled errors</li><li>Failure recovery issues</li></ul>           |
 | LI-008    | Syntax Readability and Clarity             | Ensure the language syntax is designed for readability and clarity to help developers write secure code and reduce mistakes.                            | <ul><li>Coding mistakes</li><li>Difficulty understanding code</li><li>Misunderstandings</li><li>Increased errors</li></ul>                             |
 | LI-009    | Explicit Native Asset Handling             | Ensure contracts cannot receive native assets without explicit handling to prevent unintended behaviors and vulnerabilities.                            | <ul><li>Unintended receipt of native assets</li><li>Vulnerabilities from unanticipated transfers</li><li>Unpredictable behavior</li></ul>              |
+| LI-010    | Built-In Methods Functionality             | Ensure the language provides reliable and predictable built-in methods for essential tasks (e.g., hashing, encoding/decoding, concat) to prevent errors and vulnerabilities.                            | <ul><li>Memory corruption</li><li>Unpredictable behavior</li></ul>              |
 
 ---
 
@@ -33,4 +34,5 @@ For more information, see also:
 - **[Trojan Source: Invisible Vulnerabilities](https://trojansource.codes/)**
 - **[CVE-2021-42574: Bidirectional Override Vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2021-42574)**
 - **[Hiding in Plain Sight](https://samczsun.com/hiding-in-plain-sight/)**
+- **[concat built-in can corrupt memory - Vyper contest](https://codehawks.cyfrin.io/c/2023-09-vyper-compiler/s/6)**
 - **[Audit Finding: Non-determinism in ink! contract builds](https://blog.openzeppelin.com/security-review-ink-cargo-contract#non-determinism-in-ink-contract-builds)**
