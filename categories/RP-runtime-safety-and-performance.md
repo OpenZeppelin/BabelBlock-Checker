@@ -25,3 +25,5 @@ For more information, see also:
 - **[Improve the throughput of wasm contracts on parachains](https://github.com/paritytech/substrate/issues/9354)**
 - **[FullInliner Non-Expression-Split Argument Evaluation Order Bug](https://soliditylang.org/blog/2023/07/19/full-inliner-non-expression-split-argument-evaluation-order-bug/)**
 - **[There Ain’t No Such Thing as a Free Custom Memory Allocator](https://ar5iv.labs.arxiv.org/html/2206.11728)**
+- **[Incorrect gas estimate for BALANCE opcode - Vyper contest](https://codehawks.cyfrin.io/c/2023-09-vyper-compiler/s/26)**
+
